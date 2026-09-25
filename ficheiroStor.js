@@ -12,7 +12,7 @@ app.get('/api/items', (req, res) => {
     res.json(items);
 });
 
-app.get(/api/items/:id, (req, res) => {
+app.get('/api/items/:id', (req, res) => {
     const id = Number(req.params.id);
     const item = items.find(item => item.id === id);
 
@@ -68,5 +68,5 @@ app.delete('/api/items/:id', (req,res) => {
   res.status(204).send();
 });
 app.listen(PORT, () => {
-    console.log(API a executar em http://localhost:${PORT});
+    console.log(`API a executar em http://localhost:${PORT}`);
 });
