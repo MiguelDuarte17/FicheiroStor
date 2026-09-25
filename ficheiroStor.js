@@ -3,18 +3,18 @@ const app = express();
 app.use(express.json());
 const PORT = 3000;
 
-const items = [
+const itens = [
     { id: 1, name: 'Item1'},
     { id: 2, name: 'Item2'}
 ];
 
-app.get('/api/items', (req, res) => {
-    res.json(items);
+app.get('/api/itens', (req, res) => {
+    res.json(itens);
 });
 
-app.get('/api/items/:id', (req, res) => {
+app.get('/api/itens/:id', (req, res) => {
     const id = Number(req.params.id);
-    const item = items.find(item => item.id === id);
+    const item = itens.find(item => item.id === id);
 
     if(!item) {
         return res.status(404).json({ error: 'Item não encontrado'});
@@ -23,7 +23,7 @@ app.get('/api/items/:id', (req, res) => {
     res.json(item);
 });
 
-app.post('/api/items', (req, res) => {
+app.post('/api/itens', (req, res) => {
     const { name} = req.body;
 
     if(!name){
@@ -31,17 +31,17 @@ app.post('/api/items', (req, res) => {
     }
 
     const newItem = {
-        id: items.length ? Math.max(...items.map(item => item.id)) + 1 : 1,
+        id: itens.length ? Math.max(...itens.map(item => item.id)) + 1 : 1,
         name
     };
-    items.push(newItem);
+    itens.push(newItem);
 
     res.status(201).json(newItem);
 })
 
-app.put('/api/items/:id', (req, res) => {
+app.put('/api/itens/:id', (req, res) => {
     const id = Number(req.params.id);
-    const item = items.find(item => item.id === id);
+    const item = itens.find(item => item.id === id);
 
     if(!item){
         return res.status(404).json({ error: 'Item não encontrado' });
@@ -56,14 +56,14 @@ app.put('/api/items/:id', (req, res) => {
   res.json(item);
 });
 
-app.delete('/api/items/:id', (req,res) => {
+app.delete('/api/itens/:id', (req,res) => {
     const id = Number(req.params.id);
-    const index = items.findIndex(item => item.id === id);
+    const index = itens.findIndex(item => item.id === id);
     if (index === -1) {
     return res.status(404).json({ error: 'Item não encontrado' });
   }
 
-  items.splice(index, 1);
+  itens.splice(index, 1);
 
   res.status(204).send();
 });
